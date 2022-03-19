@@ -1,0 +1,52 @@
+{% extends "registration/base.html" %}
+
+{% load django_bootstrap5 %}
+
+{% block content %}
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-4"></div>
+
+    <div class="col-md-4">
+
+      {% if forms.errors %}
+
+      <p>Some information might be incorrect</p>
+      {% endif %}
+      <br>
+      <div class="card mt-5 p-3">
+
+        <div class="card-title bg-primary py-3">
+
+          <h3 class="text-center text-white">
+            Sign Up
+
+          </h3>
+        </div>
+   
+
+
+          <form action="/accounts/register/" method="post">
+
+            {% csrf_token %}
+            {% bootstrap_form form%}
+            <div class="form-group mx-3">
+
+              <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
+              Already have an account? <a href="/accounts/login">Login</a>
+
+            </div>
+            <input type="hidden" name="next" value="{{next}}">
+          </form>
+      
+
+
+      </div>
+    
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div>
+
+{% endblock %}

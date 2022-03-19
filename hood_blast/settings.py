@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-
+import django_heroku
+import dj_database_url
+from decouple import config,Csv
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,12 +23,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@kdp-fo2bw&jjp_23)!3!7q+f^bd_6f^)0l8w-n(-8_)q^4tn2'
+SECRET_KEY = config('SECRET_KEY')
+ALLOWED_HOSTS=config('ALLOWED_HOSTS',cast=Csv())
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
+MODE = config('MODE',default='dev')
+DEBUG=config('DEBUG')
 ALLOWED_HOSTS = []
+
+ACCOUNT_ACTIVATION_DAYS=1
 
 
 # Application definition
@@ -37,6 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'hoods',
+    'registration',
+    'django_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -73,13 +83,36 @@ WSGI_APPLICATION = 'hood_blast.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
+if config('MODE')=='dev':
+    DATABASES={
+
+        'default':{
+
+            'ENGINE':'django.db.backends.postgresql',
+            'NAME':config('DB_NAME'),
+            'USER':config('DB_USER'),
+            'PASSWORD':config('DB_PASSWORD'),
+            'HOST':config('DB_HOST'),
+            'PORT':'',
+        }
+    }
+
+else:
+    DATABASES={
+
+        'default':dj_database_url.config(
+            default=config('DATABASE_URL')
+        )
+    }
+db_from_env=dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -105,7 +138,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 
@@ -115,9 +148,25 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+EMAIL_USE_TLS=config('EMAIL_USE_TLS')
+EMAIL_HOST=config('EMAIL_HOST')
+EMAIL_PORT=config('EMAIL_PORT')
+EMAIL_HOST_USER=config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL='fluentexchange@gmail.com'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+
+STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
+
 STATIC_URL = 'static/'
+STATICFILES_DIRS=[os.path.join(BASE_DIR,"static")]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+django_heroku.settings(locals())
