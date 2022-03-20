@@ -158,7 +158,6 @@ DEFAULT_FROM_EMAIL='fluentexchange@gmail.com'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 
-
 STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
 
 STATIC_URL = 'static/'
