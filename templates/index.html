@@ -3,8 +3,9 @@
 {% load static %}
 
 {% block content %}
-<div class="container">
   {% if not profile %}
+<div class="container">
+
   <div class="card shadow border-0 m-5 p-5">
 <form action="{% url 'home' %}" method="POST">
 {% csrf_token %}
@@ -12,14 +13,29 @@
 <input type="submit" value="Update">
 </form>
 </div>
-{% else %}
-<header>
-
-
-  
-</header>
-Home
-{% endif %}
 </div>
+{% else %}
+<div class="container-fluid mt-1 ">
+<header class="rounded-1">
+<div class="row">
+
+  <div class="col-12 col-lg-6 p-3">
+    <h2>Hood Blast</h2>
+    <p> Your Hood </p>
+
+    <p>Hood blast for <> Gives you access to your hood.Stay woke</p>
+  </div>
+  <div class="col-12 col-lg-6 p-3">
+
+    <img src="https://imganuncios.mitula.net/104_units_apartment_for_sale_at_kahawa_wendani_6770120592941810755.jpg" alt="" class="img-fluid">
+  </div>
+
+</div>
+
+
+</header>
+</div>
+{% endif %}
+
 
 {% endblock %}
