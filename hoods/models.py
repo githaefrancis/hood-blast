@@ -74,7 +74,8 @@ class Business(models.Model):
     self.save()
     return self
     
-
+  def __str__(self):
+    return self.name
   
 
 class Post(models.Model):

@@ -1,3 +1,4 @@
+
 from django.shortcuts import redirect, render
 
 from hoods.models import UserProfile
@@ -11,11 +12,22 @@ def index(request):
   profile=UserProfile.objects.filter(user=current_user).first()
   if request.method=='POST':
     userform=ProfileForm(request.POST)
+    postform=PostForm(request.POST)
+    businessform=BusinessForm(request.POST)
     if userform.is_valid():
       userprofile=userform.save(commit=False)
-      print('Gooo')
       userprofile.user=current_user
       userprofile.save()
+
+    if postform.is_valid():
+      new_post=postform.save(commit=False)
+      new_post.profile=profile
+      new_post.save()
+      
+    if businessform.is_valid():
+      new_business=businessform.save(commit=False)
+      new_business.profile=profile
+      new_business.save()
 
     return redirect('home')
 
