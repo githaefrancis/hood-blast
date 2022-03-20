@@ -17,7 +17,8 @@ class NeighbourHood(models.Model):
 class UserProfile(models.Model):
   name=models.CharField(max_length=100)
   national_id=models.IntegerField()
-  neighbourhood=models.OneToOneField(NeighbourHood,related_name='profile',on_delete=models.CASCADE)
+  user=models.OneToOneField(User,related_name='profile',on_delete=models.CASCADE)
+  neighbourhood=models.ForeignKey(NeighbourHood,related_name='occupant',on_delete=models.CASCADE)
   email=models.EmailField()
   created_at=models.DateTimeField(auto_now_add=True)
 
