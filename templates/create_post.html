@@ -31,8 +31,14 @@
               <input type="submit" class="btn btn-dark" value="Post">
             </form>
           </div>
-          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <form action="">
+              {% csrf_token %}
+              {% bootstrap_form businessform %}
+              <input type="submit" class="btn btn-dark" value="Post">
+            </form>
+            
+          </div>
         </div>
 
 

@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 
 from hoods.models import UserProfile
-from .forms import ProfileForm,PostForm
+from .forms import BusinessForm, ProfileForm,PostForm
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
@@ -21,9 +21,11 @@ def index(request):
 
   userform=ProfileForm()
   postform=PostForm()
+  businessform=BusinessForm()
   context={
     'userform':userform,
     'profile':profile,
-    'postform':postform
+    'postform':postform,
+    'businessform':businessform
   }
   return render(request,'index.html',context)
