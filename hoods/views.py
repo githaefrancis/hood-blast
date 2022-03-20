@@ -33,7 +33,10 @@ def index(request):
       new_business.save()
 
     return redirect('home')
-  posts=Post.objects.filter(neighbourhood=profile.neighbourhood)
+  try:
+    posts=Post.objects.filter(neighbourhood=profile.neighbourhood)
+  except:
+    posts=[]
   userform=ProfileForm()
   postform=PostForm()
   businessform=BusinessForm()
