@@ -41,6 +41,9 @@ class NeighbourHood(models.Model):
     self.occupants_count=occupants
     return occupants
 
+  def __str__(self):
+    return self.name
+
 class UserProfile(models.Model):
   name=models.CharField(max_length=100)
   national_id=models.IntegerField()

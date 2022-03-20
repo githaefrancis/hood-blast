@@ -4,13 +4,22 @@
 
 {% block content %}
 <div class="container">
+  {% if not profile %}
   <div class="card shadow border-0 m-5 p-5">
-<form action="">
+<form action="{% url 'home' %}" method="POST">
 {% csrf_token %}
-{% bootstrap_form form %}
+{% bootstrap_form userform %}
 <input type="submit" value="Update">
 </form>
 </div>
+{% else %}
+<header>
+
+
+  
+</header>
+Home
+{% endif %}
 </div>
 
 {% endblock %}
