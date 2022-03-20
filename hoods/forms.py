@@ -10,7 +10,7 @@ class ProfileForm(ModelForm):
 class PostForm(ModelForm):
   class Meta:
     model=Post
-    exclude=['created_at','profile']
+    exclude=['created_at','profile','neighbourhood']
 
 class BusinessForm(ModelForm):
   class Meta:

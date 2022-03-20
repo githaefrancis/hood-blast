@@ -53,6 +53,9 @@ class UserProfile(models.Model):
   email=models.EmailField()
   created_at=models.DateTimeField(auto_now_add=True)
 
+  def __str__(self):
+    return self.name
+
 
 class Business(models.Model):
   name=models.CharField(max_length=200)
@@ -81,6 +84,10 @@ class Business(models.Model):
 class Post(models.Model):
   title=models.CharField(max_length=200)
   profile=models.ForeignKey(UserProfile,related_name='post',on_delete=models.CASCADE,default=None)
+  neighbourhood=models.ForeignKey(NeighbourHood,related_name='post',on_delete=models.CASCADE,default=None)
   image=CloudinaryField('image',blank=True,null=True)
   content=models.TextField()
   created_at=models.DateTimeField(auto_now_add=True)
+
+  def __str__(self):
+    return self.title
