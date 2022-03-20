@@ -20,29 +20,37 @@ class NeighbourhoodTest(TestCase):
   def test_delete_neighbourhood(self):
     self.new_admin.save()
     self.new_neighbourhood.create_neighbourhood()
+    self.target_neighbourhood=NeighbourHood.objects.filter(name='Kahawa').first()
+
+    NeighbourHood.find_neighbourhood(self.target_neighbourhood.id).delete_neighbourhood()
     self.assertTrue(len(NeighbourHood.objects.all())==0)
 
   def test_find_neighbourhood(self):
     self.new_admin.save()
     self.new_neighbourhood.create_neighbourhood()
-    self.neighbourhood_result=NeighbourHood.find_neighbourhood(1)
+    self.target_neighbourhood=NeighbourHood.objects.filter(name='Kahawa').first()
+    self.neighbourhood_result=NeighbourHood.find_neighbourhood(self.target_neighbourhood.id)
+    print(self.neighbourhood_result)
     self.assertEqual(self.new_neighbourhood,self.neighbourhood_result)
 
   def test_update_neigbourhood(self):
     self.new_admin.save()
     self.new_neighbourhood.create_neighbourhood()
-    self.neighbourhood_result=NeighbourHood.find_neighbourhood(1)
+    self.target_neighbourhood=NeighbourHood.objects.filter(name='Kahawa').first()
+
+    self.neighbourhood_result=NeighbourHood.find_neighbourhood(self.target_neighbourhood.id)
     self.neighbourhood_result.update_neighbourhood(name='Kahawa Wendani')
-    self.updated_neighbourhood_result=NeighbourHood.find_neighbourhood(1)
+    self.updated_neighbourhood_result=NeighbourHood.find_neighbourhood(self.target_neighbourhood.id)
     self.assertEqual(self.updated_neighbourhood_result.name,'Kahawa Wendani')
 
   def test_update_occupants(self):
     self.new_admin.save()
     self.new_neighbourhood.create_neighbourhood()
-    self.neighbourhood_result=NeighbourHood.find_neighbourhood(1)
+    self.target_neighbourhood=NeighbourHood.objects.filter(name='Kahawa').first()
+    self.neighbourhood_result=NeighbourHood.find_neighbourhood(self.target_neighbourhood.id)
 
     self.neighbourhood_result.update_occupants()
-    self.neighbourhood_result=NeighbourHood.find_neighbourhood(1)
+    self.neighbourhood_result=NeighbourHood.find_neighbourhood(self.target_neighbourhood.id)
     
     self.assertEqual(self.neighbourhood_result.occupants_count,0)
 
@@ -59,6 +67,7 @@ class BusinessTest(TestCase):
   
   def test_create_business(self):
     self.new_admin.save()
+    self.new_neighbourhood.create_neighbourhood()
     self.new_user.save()
     self.new_profile.save()
     self.new_business.create_business()
@@ -66,23 +75,31 @@ class BusinessTest(TestCase):
 
   def test_find_business(self):
     self.new_admin.save()
+    self.new_neighbourhood.create_neighbourhood()
+
     self.new_user.save()
     self.new_profile.save()
     self.new_business.create_business()
-    self.business_result=Business.find_business(1)
+    self.target_business=Business.objects.filter(name='Chicken platta').first()
+    self.business_result=Business.find_business(self.target_business.id)
     self.assertTrue(isinstance(self.business_result,Business))
 
   def test_update_business(self):
     self.new_admin.save()
+    self.new_neighbourhood.create_neighbourhood()
+
     self.new_user.save()
     self.new_profile.save()
     self.new_business.create_business()
-    self.business_result=Business.find_business(1)
-    self.business_updated=self.business_result.update_business(name='Chicken place')
+    self.target_business=Business.objects.filter(name='Chicken platta').first()
+    
+    self.business_updated=self.target_business.update_business(name='Chicken place')
     self.assertEqual(self.business_updated.name,'Chicken place')
 
   def delete_business(self):
     self.new_admin.save()
+    self.new_neighbourhood.create_neighbourhood()
+
     self.new_user.save()
     self.new_profile.save()
     self.new_business.create_business()
