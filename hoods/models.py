@@ -10,6 +10,7 @@ class NeighbourHood(models.Model):
   location=models.CharField(max_length=500)
   occupants_count=models.IntegerField(default=0)
   admin=models.ForeignKey(User,related_name='neighbourhood',on_delete=models.CASCADE)
+  image=CloudinaryField('image',blank=True,null=True)
   created_at=models.DateTimeField(auto_now_add=True)
 
   def create_neighbourhood(self):
@@ -78,6 +79,7 @@ class Business(models.Model):
 
 class Post(models.Model):
   title=models.CharField(max_length=200)
-  image=CloudinaryField('image')
+  profile=models.ForeignKey(UserProfile,related_name='post',on_delete=models.CASCADE,default=None)
+  image=CloudinaryField('image',blank=True,null=True)
   content=models.TextField()
   created_at=models.DateTimeField(auto_now_add=True)

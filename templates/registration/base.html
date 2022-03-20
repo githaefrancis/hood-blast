@@ -1,5 +1,4 @@
 {% load django_bootstrap5 %}
-
 {% load static %}
 
 <!DOCTYPE html>
@@ -15,34 +14,8 @@
   <link rel="stylesheet" href="{% static 'css/index.css' %}">
   {% endblock %}
 </head>
-<body class="auth-main">
-  <nav class="navbar navbar-light navbar-lg bg-light fixed-top mb-5">
-    <div class="container-fluid">
-      
-      <a class="navbar-brand" href="">Hood blast</a>
-      <div class="actions">
-        {% if user.is_authenticated %}
-        <h5 class="nav-item">
-          <span class="nav-item dropdown">
-          <a href="" class="text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">{{user.username}}</a>
-  
-          <ul class="dropdown-menu" aria-labelledby="accountDropdown">
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="/accounts/logout">Logout</a></li>
-          </ul>
-        </span>
-        {% else %}
-    <h5 class="nav-item"><a href="/accounts/login" class="large-screen-menu">REGISTER / LOG IN</a>
-      {% endif %}
-    <a href="" class="bg-dark text-white text-decoration-none py-3 my-0 px-1 large-screen-menu"> SUBMIT YOUR SITE </a></h5>
-    </div>
-  </div>
-</nav>
-
+<body>
+  {% include 'navbar.html' %}
   {% block content %}
 
   {% endblock %}
@@ -55,6 +28,5 @@
   {% bootstrap_javascript %}
 
   {% endblock %}
-  
 </body>
 </html>

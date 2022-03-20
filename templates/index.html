@@ -3,6 +3,11 @@
 {% load static %}
 
 {% block content %}
+
+
+{% include 'create_post.html' %}
+
+
   {% if not profile %}
 <div class="container">
 
@@ -19,11 +24,16 @@
 <header class="rounded-1">
 <div class="row">
 
-  <div class="col-12 col-lg-6 p-3">
-    <h2>Hood Blast</h2>
-    <p> Your Hood </p>
+  <div class="col-12 col-lg-6 p-3 m-auto">
+    <div class="p-5">
+    <h2><span class="text-secondary fs-2 fw-bold">{{profile.neighbourhood.name}}</span> Hood Blast</h2>
+  
 
-    <p>Hood blast for <> Gives you access to your hood.Stay woke</p>
+    <p>Hood blast gives you access to your hood.Stay woke</p>
+
+    <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#postModal">Post</button>
+  </div>
+
   </div>
   <div class="col-12 col-lg-6 p-3">
 
