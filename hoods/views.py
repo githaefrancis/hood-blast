@@ -85,3 +85,12 @@ def contact(request):
     'contacts':contacts
   }
   return render(request,'contact.html',context)
+
+
+@login_required(login_url='accounts/login')
+def profile(request):
+  current_user=request.user
+  profile=UserProfile.objects.filter(user=current_user).first()
+  profileform=ProfileForm(instance=profile)
+
+  return render(request,'profile.html')
