@@ -1,13 +1,54 @@
 {% extends 'base.html' %}
-
+{% load django_bootstrap5 %}
 {% block content %}
-<div class="container">
-
-  <div class="m-auto">
-
-    Profile form
-    Profile neighbourhood
-    profile
+<div class="container m-auto">
+  <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+  
+            Update Profile
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+          <div>
+            <form action="">
+        
+             {% csrf_token %}
+        
+             {% bootstrap_form profileform %}
+             <input type="submit" value="update">
+            </form>
+          </div>
+  
+  
+  
+        </div>
+    
+      </div>
+    </div>
   </div>
+  
+    {% if profile %}
+    <div class="shadow card p-5 m-5">
+    <h3>Profile</h3>
+      <p class="">Name : {{profile.name}}</p>
+      <p class="">Email : {{profile.email}}</p>
+      <p class="">National Id : {{profile.national_id}}</p>
+      <p class="">Neighbourhood : {{profile.neighbourhood.name}}</p>
+      <p class="">Created at : {{profile.created_at}}</p>
+
+      <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#profileModal">Edit</button>
+
+
+     </div>
+     
+    {% else %}
+    <a href="{% url 'home' %}"> Create Profile</a>
+    {% endif %}
+
 </div>
 {% endblock %}

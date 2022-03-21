@@ -90,7 +90,14 @@ def contact(request):
 @login_required(login_url='accounts/login')
 def profile(request):
   current_user=request.user
-  profile=UserProfile.objects.filter(user=current_user).first()
-  profileform=ProfileForm(instance=profile)
-
-  return render(request,'profile.html')
+  try:
+    profile=UserProfile.objects.filter(user=current_user).first()
+    profileform=ProfileForm(instance=profile)
+  except:
+    profileform=ProfileForm()
+    profile=None
+  context={
+    'profileform':profileform,
+    'profile':profile
+  }
+  return render(request,'profile.html',context)
