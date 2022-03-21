@@ -25,7 +25,7 @@
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="post" role="tabpanel" aria-labelledby="post-tab">
 
-            <form action="{% url 'home' %}" method='POST'>
+            <form action="{% url 'home' %}" method="POST" enctype="multipart/form-data">
               {% csrf_token %}
               {% bootstrap_form postform %}
               <input type="submit" class="btn btn-dark" value="Post">

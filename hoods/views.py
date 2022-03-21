@@ -14,24 +14,26 @@ def index(request):
   
   if request.method=='POST':
     userform=ProfileForm(request.POST)
-    postform=PostForm(request.POST)
+    postform=PostForm(request.POST,request.FILES)
     businessform=BusinessForm(request.POST)
 
     if userform.is_valid():
       userprofile=userform.save(commit=False)
       userprofile.user=current_user
       userprofile.save()
+    
 
-    elif postform.is_valid():
+    if postform.is_valid():
       new_post=postform.save(commit=False)
       new_post.profile=profile
       new_post.neighbourhood=profile.neighbourhood
       new_post.save()
       
-    elif businessform.is_valid():
+    if businessform.is_valid():
       new_business=businessform.save(commit=False)
       new_business.profile=profile
       new_business.save()
+    
 
     return redirect('home')
   try:
