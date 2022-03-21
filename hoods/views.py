@@ -1,4 +1,5 @@
 
+from django.http import Http404
 from django.shortcuts import redirect, render
 
 from hoods.models import Business, NeighbourHood, UserProfile,Post
@@ -51,3 +52,19 @@ def index(request):
     'businesses':businesses
   }
   return render(request,'index.html',context)
+
+
+@login_required(login_url='accounts/login')
+def search(request):
+  if 'search' in request.GET and request.GET['search']:
+    try:
+      search_word=request.GET.get('search')
+      post_results=Post.search_posts(search_word)
+
+      context={
+      'posts':post_results
+      }
+
+      return render(request,'search.html',context)
+    except ValueError:
+      return Http404

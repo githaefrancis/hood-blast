@@ -91,3 +91,7 @@ class Post(models.Model):
 
   def __str__(self):
     return self.title
+
+  @classmethod
+  def search_posts(cls,search_word):
+    return cls.objects.filter(title__icontains=search_word)

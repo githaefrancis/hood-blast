@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container">
+
+  <h4 class="text-center">Posts Search results</h4>
+
+  {% if posts %}
+  {% for post in posts %}
+
+  <div class="card mb-3 border-0">
+    
+    <div class="card-body">
+    
+    <img class="card-img img-fluid " src="{{post.image.url}}">
+
+      <div class="card-text p-2 shadow">
+      <h4>{{post.title}}</h4>
+      <p>{{post.content}}</p>
+      <p>By {{post.profile.name}}  {{post.created_at}}</p>
+      </div>
+    </div>
+
+  </div>
+
+  {% endfor %}
+
+
+  {% endif %}
+</div>
+
+{% endblock %}
