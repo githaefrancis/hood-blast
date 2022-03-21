@@ -90,6 +90,12 @@ def contact(request):
 @login_required(login_url='accounts/login')
 def profile(request):
   current_user=request.user
+
+
+  if request.method=='POST':
+    profileform=ProfileForm(request.POST,instance=request.user.profile)
+    if profileform.is_valid():
+      profileform.save()
   try:
     profile=UserProfile.objects.filter(user=current_user).first()
     profileform=ProfileForm(instance=profile)
