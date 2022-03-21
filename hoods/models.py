@@ -101,6 +101,8 @@ class Contact(models.Model):
   title=models.CharField(max_length=100)
   phone=models.CharField(max_length=20)
   email=models.EmailField()
+  neighbourhood=models.ForeignKey(NeighbourHood,related_name='contact',on_delete=models.CASCADE,default=None)
+  
 
   def __str__(self):
     return self.title

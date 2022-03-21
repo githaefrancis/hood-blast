@@ -9,7 +9,7 @@ class NeighbourhoodAdmin(admin.ModelAdmin):
   list_display=['name','location','occupants_count','admin','image','created_at']
 
 class ContactAdmin(admin.ModelAdmin):
-  list_display=['title','phone','email']
+  list_display=['title','phone','email','neighbourhood']
 
 class PostAdmin(admin.ModelAdmin):
   list_display=['title','profile','neighbourhood','image','content','created_at']
