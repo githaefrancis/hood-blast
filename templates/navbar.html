@@ -30,6 +30,29 @@
         <input class="form-control me-2" name="search" type="search" placeholder="Search Post or Business" aria-label="Search">
         <button class="btn btn-outline-dark me-2" type="submit">Search</button>
       </form>
+   
+      <div class="navbar-nav m-auto">
+        {% if not user.is_authenticated %}
+        <div class="nav-item">
+          <a href="" class="nav-link btn-dark text-white rounded-1">Login</a>
+        </div>
+
+        {% else %}
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{user.username}}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="/accounts/logout">Logout</a></li>
+          
+          </ul>
+        </li>
+        {% endif %}
+      </div>
     </div>
+
+
   </div>
 </nav>

@@ -54,7 +54,7 @@ def index(request):
   return render(request,'index.html',context)
 
 
-@login_required(login_url='accounts/login')
+@login_required(login_url='/accounts/login')
 def search(request):
   if 'search' in request.GET and request.GET['search']:
     try:
