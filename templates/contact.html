@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+  <h3 class="m-3">Essential Contacts</h3>
+  {% if contacts %}
+
+  <ul>
+    {% for contact in contacts %}
+    <li class="d-flex justify-content-between "><span>Contact</span> <span> Phone</span>  <span>Email</span></li>
+    
+    <li class="d-flex justify-content-between my-2"><span>{{contact.title}}</span> <span> {{ contact.phone}}</span>  <span>{{contact.email}}</span></li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>No contacts found!</p>
+  {% endif %}
+</div>
+
+{% endblock %}

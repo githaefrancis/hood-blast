@@ -2,7 +2,7 @@
 from django.http import Http404
 from django.shortcuts import redirect, render
 
-from hoods.models import Business, NeighbourHood, UserProfile,Post
+from hoods.models import Business, Contact, NeighbourHood, UserProfile,Post
 from .forms import BusinessForm, ProfileForm,PostForm
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -70,3 +70,18 @@ def search(request):
       return render(request,'search.html',context)
     except ValueError:
       return Http404
+
+
+@login_required(login_url='accounts/login')
+def contact(request):
+  current_user=request.user
+  try:
+    profile=UserProfile.objects.filter(user=current_user).first()
+    contacts=Contact.objects.filter(neighbourhood=profile.neighbourhood).all()
+  except:
+    contacts=[]
+  print(profile)
+  context={
+    'contacts':contacts
+  }
+  return render(request,'contact.html',context)
