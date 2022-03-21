@@ -95,3 +95,12 @@ class Post(models.Model):
   @classmethod
   def search_posts(cls,search_word,neighbourhood):
     return cls.objects.filter(title__icontains=search_word,neighbourhood=neighbourhood)
+
+
+class Contact(models.Model):
+  title=models.CharField(max_length=100)
+  phone=models.CharField(max_length=20)
+  email=models.EmailField()
+
+  def __str__(self):
+    return self.title
