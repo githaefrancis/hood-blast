@@ -31,13 +31,13 @@
 
     <p>Hood blast gives you access to your hood.Stay woke</p>
 
-    <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#postModal">Post</button>
+    <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#postModal">Post / Business</button>
   </div>
 
   </div>
   <div class="col-12 col-lg-6 p-3">
 
-    <img src="https://imganuncios.mitula.net/104_units_apartment_for_sale_at_kahawa_wendani_6770120592941810755.jpg" alt="" class="img-fluid">
+    <img src="{{profile.neighbourhood.image.url}}" alt="" class="img-fluid">
   </div>
 
 </div>
@@ -48,11 +48,46 @@
 
 <div class="container">
 
+  <div class="row">
+    <div class="col-lg-8">
+  <h2 class="text-center mt-2">What's up</h2>
   {% if posts %}
   {% for post in posts %}
-  {{post.title}}
+  <div class="card mb-3 border-0">
+    
+    <div class="card-body">
+    
+    <img class="card-img img-fluid " src="{{post.image.url}}">
+
+      <div class="card-text p-2 shadow">
+      <h4>{{post.title}}</h4>
+      <p>{{post.content}}</p>
+      <p>By {{post.profile.name}}  {{post.created_at}}</p>
+      </div>
+    </div>
+
+  </div>
+  
   {% endfor %}
   {% endif %}
+</div>
+
+<div class="col-lg-4">
+  <h2 class="mt-2">Businesses</h2>
+  {% for business in businesses %}
+
+  <div class="card border-0">
+    <div class="card-body shadow">
+
+      <h4>{{business.name}}</h4>
+      <p>Located at <strong>{{business.neighbourhood.name}}</strong></p>
+      <p>Contact <strong>{{business.email}}</strong></p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+</div>
 </div>
 </div>
 {% endif %}

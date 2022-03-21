@@ -1,7 +1,7 @@
 
 from django.shortcuts import redirect, render
 
-from hoods.models import NeighbourHood, UserProfile,Post
+from hoods.models import Business, NeighbourHood, UserProfile,Post
 from .forms import BusinessForm, ProfileForm,PostForm
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -35,8 +35,10 @@ def index(request):
     return redirect('home')
   try:
     posts=Post.objects.filter(neighbourhood=profile.neighbourhood)
+    businesses=Business.objects.filter(neighbourhood=profile.neighbourhood)
   except:
     posts=[]
+    businesses=[]
   userform=ProfileForm()
   postform=PostForm()
   businessform=BusinessForm()
@@ -45,6 +47,7 @@ def index(request):
     'profile':profile,
     'postform':postform,
     'businessform':businessform,
-    'posts':posts
+    'posts':posts,
+    'businesses':businesses
   }
   return render(request,'index.html',context)

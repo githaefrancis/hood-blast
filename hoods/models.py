@@ -85,7 +85,7 @@ class Post(models.Model):
   title=models.CharField(max_length=200)
   profile=models.ForeignKey(UserProfile,related_name='post',on_delete=models.CASCADE,default=None)
   neighbourhood=models.ForeignKey(NeighbourHood,related_name='post',on_delete=models.CASCADE,default=None)
-  image=CloudinaryField('image',blank=True,null=True)
+  image=CloudinaryField('image',default=None)
   content=models.TextField()
   created_at=models.DateTimeField(auto_now_add=True)
 
