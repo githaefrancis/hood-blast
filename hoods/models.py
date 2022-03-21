@@ -93,5 +93,5 @@ class Post(models.Model):
     return self.title
 
   @classmethod
-  def search_posts(cls,search_word):
-    return cls.objects.filter(title__icontains=search_word)
+  def search_posts(cls,search_word,neighbourhood):
+    return cls.objects.filter(title__icontains=search_word,neighbourhood=neighbourhood)

@@ -61,7 +61,7 @@ def search(request):
   if 'search' in request.GET and request.GET['search']:
     try:
       search_word=request.GET.get('search')
-      post_results=Post.search_posts(search_word)
+      post_results=Post.search_posts(search_word,request.user.profile.neighbourhood)
 
       context={
       'posts':post_results
