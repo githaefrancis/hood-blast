@@ -11,7 +11,7 @@ RUN apk update \
 RUN pip install --upgrade pip
 RUN pip install pipenv
 COPY ./Pipfile .
-RUN pipenv install --system --ignore-pipfile
+RUN pipenv install --ignore-pipfile
 
 COPY ./entrypoint.sh .
 RUN sed -i 's/\r$//g' /usr/src/hood_blast/entrypoint.sh
