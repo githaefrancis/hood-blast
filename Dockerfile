@@ -1,4 +1,4 @@
-FROM python:3.9-alpine3.15
+FROM python:3.8.16-alpine3.17
 
 WORKDIR /usr/src/hood_blast
 
