@@ -12,7 +12,7 @@ RUN pip install --upgrade pip
 RUN pip install pipenv
 COPY ./Pipfile .
 COPY ./Pipfile.lock .
-RUN pipenv install --system
+RUN pipenv install --system --deploy --ignore-pipfile
 
 COPY ./entrypoint.sh .
 RUN sed -i 's/\r$//g' /usr/src/hood_blast/entrypoint.sh
