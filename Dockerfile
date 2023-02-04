@@ -11,6 +11,7 @@ RUN apk update \
 RUN pip install --upgrade pip
 RUN pip install pipenv
 COPY ./Pipfile .
+COPY ./Pipfile.lock .
 RUN pipenv install --system
 
 COPY ./entrypoint.sh .
