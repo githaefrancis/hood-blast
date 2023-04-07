@@ -99,9 +99,7 @@ WSGI_APPLICATION = 'hood_blast.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-
-if config('MODE')=='dev':
-    DATABASES={
+DATABASES={
 
         'default':{
 
@@ -113,14 +111,27 @@ if config('MODE')=='dev':
             'PORT':'5432',
         }
     }
+# if config('MODE')=='dev':
+#     DATABASES={
 
-else:
-    DATABASES={
+#         'default':{
 
-        'default':dj_database_url.config(
-            default=config('DATABASE_URL')
-        )
-    }
+#             'ENGINE':'django.db.backends.postgresql',
+#             'NAME':config('DB_NAME'),
+#             'USER':config('DB_USER'),
+#             'PASSWORD':config('DB_PASSWORD'),
+#             'HOST':config('DB_HOST'),
+#             'PORT':'5432',
+#         }
+#     }
+
+# else:
+#     DATABASES={
+
+#         'default':dj_database_url.config(
+#             default=config('DATABASE_URL')
+#         )
+#     }
 db_from_env=dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
