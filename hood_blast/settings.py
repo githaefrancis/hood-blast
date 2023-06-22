@@ -167,7 +167,7 @@ EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL='hoodblastnews@gmail.com'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-CORS-ALLOWED_ORIGINS = ['localhost','https://hood-blast.ofasnplugs.com']
+CORS_ALLOWED_ORIGINS = ['localhost','https://hood-blast.ofasnplugs.com']
 
 CSRF_ALLOWED_ORIGINS = ['localhost','https://hood-blast.ofasnplugs.com',]
 
