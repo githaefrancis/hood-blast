@@ -168,6 +168,9 @@ DEFAULT_FROM_EMAIL='hoodblastnews@gmail.com'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+CSRF_ALLOWED_ORIGINS = [
+    'https://hood-blast.ofasnplugs.com',
+]
 
 STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
 
