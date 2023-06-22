@@ -174,7 +174,7 @@ CORS_ALLOWED_ORIGINS = ["http://localhost",
 
 ]
 
-CSRF_ALLOWED_ORIGINS = [
+CSRF_TRUSTED_ORIGINS = [
 "http://localhost",
 "http://localhost/",
 "https://hood-blast.ofasnplugs.com",
