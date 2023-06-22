@@ -122,7 +122,7 @@ else:
 db_from_env=dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
-ALLOWED_HOSTS=['localhost','https://hood-blast.ofasnplugs.com']
+ALLOWED_HOSTS=["localhost","https://hood-blast.ofasnplugs.com"]
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -167,9 +167,19 @@ EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL='hoodblastnews@gmail.com'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-CORS_ALLOWED_ORIGINS = ['localhost','https://hood-blast.ofasnplugs.com']
+CORS_ALLOWED_ORIGINS = ["http://localhost",
+"http://localhost/",
+"https://hood-blast.ofasnplugs.com",
+"https://hood-blast.ofasnplugs.com/",
 
-CSRF_ALLOWED_ORIGINS = ['localhost','https://hood-blast.ofasnplugs.com',]
+]
+
+CSRF_ALLOWED_ORIGINS = [
+"http://localhost",
+"http://localhost/",
+"https://hood-blast.ofasnplugs.com",
+"https://hood-blast.ofasnplugs.com/",
+]
 
 
 STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
