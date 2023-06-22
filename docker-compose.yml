@@ -1,33 +1,25 @@
 version: "3.8"
 
 services:
-  web:
+  web_hood:
     build: .
-    command: gunicorn hood_blast.wsgi:application --bind 0.0.0.0:8004 --workers 3
+    command: gunicorn hood_blast.wsgi:application --bind 0.0.0.0:8005 --workers 1
     volumes:
       - .:/usr/src/hood_blast/
     ports:
-      - 8004:8004
+      - 8005:8005
     env_file:
       - ./.env
     depends_on:
-      - db
-    networks:
-      - network-word
-  db:
+      - db_hood
+  db_hood:
     image: postgres:13.0-alpine
     volumes:
-      - postgres_data2:/var/lib/postgresql/data/
+      - postgres_data_hood:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=frank
       - POSTGRES_PASSWORD=1234
       - POSTGRES_DB=hoodblast
-    networks:
-      - network-word    
-
 volumes:
-  postgres_data2:
+  postgres_data_hood:
 
-networks:
-  network-word:
-    external: true
