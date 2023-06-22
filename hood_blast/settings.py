@@ -17,8 +17,6 @@ from decouple import config,Csv
 import os
 import cloudinary
 
-from dotenv import load_dotenv
-load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -99,7 +97,9 @@ WSGI_APPLICATION = 'hood_blast.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-DATABASES={
+
+if config('MODE')=='dev':
+    DATABASES={
 
         'default':{
 
@@ -111,30 +111,18 @@ DATABASES={
             'PORT':'5432',
         }
     }
-# if config('MODE')=='dev':
-#     DATABASES={
 
-#         'default':{
+else:
+    DATABASES={
 
-#             'ENGINE':'django.db.backends.postgresql',
-#             'NAME':config('DB_NAME'),
-#             'USER':config('DB_USER'),
-#             'PASSWORD':config('DB_PASSWORD'),
-#             'HOST':config('DB_HOST'),
-#             'PORT':'5432',
-#         }
-#     }
+        'default':dj_database_url.config(
+            default=config('DATABASE_URL')
+        )
+    }
+db_from_env=dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
-# else:
-#     DATABASES={
-
-#         'default':dj_database_url.config(
-#             default=config('DATABASE_URL')
-#         )
-#     }
-# db_from_env=dj_database_url.config(conn_max_age=500)
-# DATABASES['default'].update(db_from_env)
-
+ALLOWED_HOSTS=config('ALLOWED_HOSTS',cast=Csv())
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
